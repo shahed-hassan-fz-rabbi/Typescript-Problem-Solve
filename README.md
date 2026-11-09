@@ -1,12 +1,8 @@
 # TypeScript Assignment 1
 
-## Overview
+This repository has my solutions for Assignment 1. I solved eight problems using TypeScript topics like optional parameters, union types, generics, interfaces, readonly tuples, classes, and Promises.
 
-This repository contains my solutions for Assignment 1: Problem Solving with TypeScript and OOP. The eight exercises cover optional parameters, union types and narrowing, readonly tuples, generics, interfaces, keyed property access, inheritance and asynchronous Promises.
+All solutions are in [`solutions.ts`](./solutions.ts). I also wrote two short blog posts:
 
-## Blog Posts
-
-- [Type Aliases and Interfaces in TypeScript](./type-vs-interface.md)
-- [Type Narrowing in TypeScript](./type-narrowing.md)
-
-All coding solutions are in [solutions.ts](./solutions.ts).
+- [Type Aliases and Interfaces](./type-vs-interface.md)
+- [Type Narrowing](./type-narrowing.md)

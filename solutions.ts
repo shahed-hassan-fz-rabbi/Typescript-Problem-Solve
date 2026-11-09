@@ -1,17 +1,17 @@
-function multiplyValue(inputValue: number, multiplier: number = 2): number {
-    return inputValue * multiplier;
+function multiplyValue(value: number, multiplier: number = 2): number {
+    return value * multiplier;
 }
 
-function processInput(inputValue: string | number | boolean): string | number {
-    if (typeof inputValue === "string") {
-        return inputValue.trim().toLowerCase();
+function processInput(value: string | number | boolean): string | number {
+    if (typeof value === "string") {
+        return value.trim().toLowerCase();
     }
 
-    if (typeof inputValue === "number") {
-        return inputValue * 10;
+    if (typeof value === "number") {
+        return value * 10;
     }
 
-    return inputValue ? "Active" : "Inactive";
+    return value ? "Active" : "Inactive";
 }
 
 function formatCoordinate(coordinates: readonly [number, number, string]): string {
@@ -19,8 +19,8 @@ function formatCoordinate(coordinates: readonly [number, number, string]): strin
     return `Location: ${locationName} (${latitude}, ${longitude})`;
 }
 
-function concatenateArrays<T>(...inputArrays: T[][]): T[] {
-    return inputArrays.flat();
+function concatenateArrays<T>(...arrays: T[][]): T[] {
+    return arrays.flat();
 }
 
 interface Course {
@@ -29,12 +29,12 @@ interface Course {
     isPublished: boolean;
 }
 
-function getPopularCourses(courseList: Course[], minimumStudentCount: number): Course[] {
-    return courseList.filter((course: Course): boolean => course.isPublished && course.students >= minimumStudentCount);
+function getPopularCourses(courses: Course[], minStudents: number): Course[] {
+    return courses.filter((course: Course): boolean => course.isPublished && course.students >= minStudents);
 }
 
-function pluckValues<T, K extends keyof T>(itemList: T[], propertyKey: K): T[K][] {
-    return itemList.map((item: T): T[K] => item[propertyKey]);
+function pluckValues<T, K extends keyof T>(items: T[], key: K): T[K][] {
+    return items.map((item: T): T[K] => item[key]);
 }
 
 class Employee {
