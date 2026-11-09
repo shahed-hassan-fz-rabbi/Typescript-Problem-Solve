@@ -36,3 +36,14 @@ function concatenateArrays(...arr) {
 //check problem 4 solution
 console.log(concatenateArrays(["a", "b"], ["c", "d"]));
 console.log(concatenateArrays([1, 2], [3, 4], [5]));
+function getPopularCourses(arr, minStudents) {
+    return arr.filter(c => c.isPublished && c.students >= minStudents);
+}
+//check problem 5 solution
+const courses = [
+    { title: "TypeScript Mastery", students: 120, isPublished: true },
+    { title: "Draft Course", students: 200, isPublished: false },
+    { title: "Basic HTML", students: 45, isPublished: true },
+    { title: "Next.js Pro", students: 85, isPublished: true }
+];
+console.log(getPopularCourses(courses, 80));
