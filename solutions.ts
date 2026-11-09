@@ -1,26 +1,26 @@
-function multiplyValue(value: number, multiplier: number = 2): number {
-    return value * multiplier;
+function multiplyValue(inputValue: number, multiplier: number = 2): number {
+    return inputValue * multiplier;
 }
 
-function processInput(value: string | number | boolean): string | number {
-    if (typeof value === "string") {
-        return value.trim().toLowerCase();
+function processInput(inputValue: string | number | boolean): string | number {
+    if (typeof inputValue === "string") {
+        return inputValue.trim().toLowerCase();
     }
 
-    if (typeof value === "number") {
-        return value * 10;
+    if (typeof inputValue === "number") {
+        return inputValue * 10;
     }
 
-    return value ? "Active" : "Inactive";
+    return inputValue ? "Active" : "Inactive";
 }
 
-function formatCoordinate(location: readonly [number, number, string]): string {
-    const [latitude, longitude, locationName] = location;
+function formatCoordinate(coordinates: readonly [number, number, string]): string {
+    const [latitude, longitude, locationName] = coordinates;
     return `Location: ${locationName} (${latitude}, ${longitude})`;
 }
 
-function concatenateArrays<T>(...arrays: T[][]): T[] {
-    return arrays.flat();
+function concatenateArrays<T>(...inputArrays: T[][]): T[] {
+    return inputArrays.flat();
 }
 
 interface Course {
@@ -29,12 +29,12 @@ interface Course {
     isPublished: boolean;
 }
 
-function getPopularCourses(courses: Course[], minStudents: number): Course[] {
-    return courses.filter((course: Course): boolean => course.isPublished && course.students >= minStudents);
+function getPopularCourses(courseList: Course[], minimumStudentCount: number): Course[] {
+    return courseList.filter((course: Course): boolean => course.isPublished && course.students >= minimumStudentCount);
 }
 
-function pluckValues<T, K extends keyof T>(items: T[], key: K): T[K][] {
-    return items.map((item: T): T[K] => item[key]);
+function pluckValues<T, K extends keyof T>(itemList: T[], propertyKey: K): T[K][] {
+    return itemList.map((item: T): T[K] => item[propertyKey]);
 }
 
 class Employee {
