@@ -2,69 +2,32 @@
 
 ## Introduction
 
-Type Narrowing is an important feature of TypeScript. It helps us identify the specific type of a variable when that variable can contain different types of values. This makes our code safer and easier to work with.
+A union type gives a value more than one possible shape. That flexibility is useful at function boundaries, but code must check which possibility it received before using type-specific operations. Type narrowing is TypeScript's way of tracking those checks and reducing a broad type to a more specific one inside a section of code.
 
-## What is Type Narrowing?
+## Practical checks
 
-Sometimes a variable can accept multiple types using a union type. TypeScript allows us to check the actual type before performing an operation.
-
-There are different ways to narrow types in TypeScript.
-
-## 1. Using typeof
-
-The `typeof` operator checks primitive types such as string, number, and boolean.
+For primitive values, `typeof` is the natural guard. After checking a string, TypeScript permits string methods; the other branch below is known to be numeric:
 
 ```typescript
-function checkVal(val: string | number): string {
-    if (typeof val === "string") {
-        return val.toUpperCase();
-    }
-
-    return val.toString();
+function describe(value: string | number): string {
+  if (typeof value === "string") return value.trim().toUpperCase();
+  return value.toFixed(2);
 }
 ```
 
-Here, TypeScript understands that `val` is a string inside the `if` block. Otherwise, it is a number.
-
-## 2. Using instanceof
-
-The `instanceof` operator checks whether an object belongs to a particular class.
+For class instances, `instanceof` checks the runtime prototype chain:
 
 ```typescript
-class Student {
-    name = "Rahim";
-}
-
-function checkUser(val: Student | Date): string {
-    if (val instanceof Student) {
-        return val.name;
-    }
-
-    return val.toDateString();
+function format(value: Date | Error): string {
+  if (value instanceof Date) return value.toDateString();
+  return value.message;
 }
 ```
 
-This helps TypeScript identify which properties and methods are available.
+For object unions with different properties, use the `in` operator. Given `type Cat = { meow: string }` and `type Dog = { bark: string }`, the expression `"meow" in pet` identifies the cat branch, so `pet.meow` is safe there. The else branch can use `pet.bark`. This works best when each variant has a property that distinguishes it.
 
-## 3. Using the in Operator
-
-The `in` operator checks whether a property exists in an object.
-
-```typescript
-type Cat = { meow: string };
-type Dog = { bark: string };
-
-function checkPet(pet: Cat | Dog): string {
-    if ("meow" in pet) {
-        return pet.meow;
-    }
-
-    return pet.bark;
-}
-```
-
-Here, TypeScript identifies the correct object type based on its property.
+These checks also make runtime behavior clearer: the program verifies a value instead of assuming a caller supplied the expected shape. For more complex APIs, a dedicated discriminant such as `kind: "cat" | "dog"` can make branches even more explicit.
 
 ## Conclusion
 
-Type Narrowing is useful when working with union types. Operators like `typeof`, `instanceof`, and `in` help us safely access values and properties. It also reduces type-related errors and makes TypeScript code more reliable.
+Use `typeof` for primitive unions, `instanceof` for class instances, and `in` when object variants have distinct properties. Each guard helps TypeScript and the reader understand what operations are safe. Narrowing therefore connects runtime checks with compile-time type safety.

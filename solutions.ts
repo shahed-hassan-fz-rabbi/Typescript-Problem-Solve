@@ -1,14 +1,6 @@
-//problem 1 solution
-
 function multiplyValue(value: number, multiplier: number = 2): number {
     return value * multiplier;
 }
-
-//console.log(multiplyValue(10));
-//console.log(multiplyValue(10, 5));
-//console.log(multiplyValue(7, 0));
-
-//problem 2 solution
 
 function processInput(value: string | number | boolean): string | number {
     if (typeof value === "string") {
@@ -22,43 +14,14 @@ function processInput(value: string | number | boolean): string | number {
     return value ? "Active" : "Inactive";
 }
 
-//check problem 2 solution
-
-//console.log(processInput("  TypeScript  "));
-//console.log(processInput(7));
-//console.log(processInput(true));
-//console.log(processInput(false));
-
-
-//problem 3 solution
-
-
-
-function formatCoordinate(loc: readonly [number, number, string]): string {
-    const [lat, lon, name] = loc;
-    return `Location: ${name} (${lat}, ${lon})`;
+function formatCoordinate(location: readonly [number, number, string]): string {
+    const [latitude, longitude, locationName] = location;
+    return `Location: ${locationName} (${latitude}, ${longitude})`;
 }
 
-//check problem 3 solution
-
-
-//console.log(formatCoordinate([23.81, 90.41, "Dhaka"]));
-//console.log(formatCoordinate([22.35, 91.78, "Chittagong"]));
-
-//problem 4 solution
-
-function concatenateArrays<T>(...arr: T[][]): T[] {
-    return arr.flat();
+function concatenateArrays<T>(...arrays: T[][]): T[] {
+    return arrays.flat();
 }
-
-//check problem 4 solution
-
-console.log(concatenateArrays(["a", "b"], ["c", "d"]));
-console.log(concatenateArrays([1, 2], [3, 4], [5]));
-
-
-
- //problem 5 solution
 
 interface Course {
     title: string;
@@ -66,42 +29,13 @@ interface Course {
     isPublished: boolean;
 }
 
-function getPopularCourses(arr: Course[], minStudents: number): Course[] {
-    return arr.filter(c => c.isPublished && c.students >= minStudents);
+function getPopularCourses(courses: Course[], minStudents: number): Course[] {
+    return courses.filter((course: Course): boolean => course.isPublished && course.students >= minStudents);
 }
 
-//check problem 5 solution
-const courses = [
-{ title: "TypeScript Mastery", students: 120, isPublished: true },
-{ title: "Draft Course", students: 200, isPublished: false },
-{ title: "Basic HTML", students: 45, isPublished: true },
-{ title: "Next.js Pro", students: 85, isPublished: true }
-];
-
-console.log(getPopularCourses(courses, 80));
-
-
-
-//problem 6 solution
-
-function pluckValues<T, K extends keyof T>(arr: T[], key: K): T[K][] {
-    return arr.map(item => item[key]);
+function pluckValues<T, K extends keyof T>(items: T[], key: K): T[K][] {
+    return items.map((item: T): T[K] => item[key]);
 }
-
-//check problem 6 solution
-
-//const users = [
-//    { id: 1, name: "Rakib", role: "Admin" },
-//    { id: 2, name: "Sadia", role: "Editor" },
-//    { id: 3, name: "Tariq", role: "Subscriber" }
-//];
-
-//console.log(pluckValues(users, "name"));
-//console.log(pluckValues(users, "id"));
-
-
-
-//problem 7 solution
 
 class Employee {
     protected name: string;
@@ -130,35 +64,13 @@ class Manager extends Employee {
     }
 }
 
-//check problem 7 solution
-
-//const m = new Manager("Alice", 50000, "Engineering");
-//console.log(m.getDetails());
-//console.log(m.getRoleInfo());
-
-
-
-//problem 8 solution
-
 async function validateAgeAsync(age: number): Promise<string> {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject): void => {
         if (age < 18) {
             reject(new Error("Access Denied: Must be 18 or older"));
-        } else {
-            setTimeout(() => {
-                resolve("Access Granted");
-            }, 1000);
+            return;
         }
+
+        setTimeout((): void => resolve("Access Granted"), 1000);
     });
 }
-
-//check problem 8 solution
-
-//validateAgeAsync(20)
-//    .then(res => console.log(res))
-//    .catch(err => console.log(err.message));
-
-//validateAgeAsync(15)
-//    .then(res => console.log(res))
-//    .catch(err => console.log(err.message));
-
